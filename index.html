@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="Rijaya Logo 1.png">
+    <title>Rijaya Advertising - Percetakan Digital</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="gaming-theme">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand gaming-logo" href="#">
+                <img src="Rijaya Logo 1.png" alt="Rijaya Logo" class="navbar-logo">
+                Rijaya<span class="text-danger">Advertising</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">HOME</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">PRODUCTS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#innovations">INNOVATIONS</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">CONTACT</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#cartModal">
+                            <i class="bi bi-cart3"></i> Cart <span class="cart-count badge bg-danger">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">
+                        <i class="bi bi-person-circle"></i> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<!-- Shopping Cart Modal -->
+<div class="modal fade" id="cartModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Shopping Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems">
+                    <!-- Cart items will be displayed here -->
+                </div>
+                <div class="cart-total">
+                    <h5>Total: Rp. <span id="cartTotal">0</span></h5>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" onclick="proceedToCheckout()">Checkout</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Checkout Modal -->
+<div class="modal fade" id="checkoutModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Checkout</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="checkoutForm">
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <textarea class="form-control" required></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Payment Method</label>
+                        <select class="form-select" required>
+                            <option value="">Select payment method</option>
+                            <option value="transfer">Bank Transfer</option>
+                            <option value="ewallet">E-Wallet</option>
+                            <option value="cod">Cash on Delivery</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger" onclick="placeOrder()">Place Order</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Login to Your Account</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="loginForm">
+            <div class="mb-3">
+              <label for="loginEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="loginEmail" required>
+            </div>
+            <div class="mb-3">
+              <label for="loginPassword" class="form-label">Password</label>
+              <input type="password" class="form-control" id="loginPassword" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+            <p class="me-auto">Don't have an account? 
+                <a href="#" onclick="switchToRegister()" class="text-danger">Register</a>
+            </p>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" onclick="loginUser()">Login</button>
+        </div>        
+      </div>
+    </div>
+  </div>
+  
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="hero-video-container">
+            <div class="hero-content">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8" data-aos="fade-right">
+                            <h1 class="display-3 fw-bold text-uppercase">Solusi Percetakan Digital Anda</h1>
+                            <p class="lead">Experience next-level digital printing and advertising solutions. Kami hadir sebagai partner terbaik untuk menunjang segala kebutuhan promosi dan branding Anda. Dengan layanan lengkap mulai dari pembuatan stiker custom, banner, xbanner, hingga jasa desain grafis profesional, kami siap membantu Anda tampil lebih menonjol dan menarik perhatian.</p>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                                <a href="#products" class="btn btn-danger btn-lg px-4 me-md-2">Explore Products</a>
+                                <a href="#contact" class="btn btn-outline-light btn-lg px-4">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+<section id="products" class="products-section">
+    <div class="container">
+        <h2 class="section-title" data-aos="fade-up">FEATURED PRODUCTS</h2>
+        <div class="row g-4">
+
+            <!-- Banner -->
+            <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="100">
+                <div class="product-card" onclick="showProductDetail('Banner', 'Banner.jpg', 'Rp 20.000/m', 'Tingkatkan visibilitas bisnis Anda dengan banner erkualitas tinggi! Cetakan tajam, warna cerah, serta bahan tahan cuaca menjadikan produk kami pilihan tepat untuk acara indoor maupun outdoor. Cocok untuk toko, pameran, seminar, promosi event, dan lainnya.')">
+                    <div class="product-image">
+                        <img src="Banner.jpg" alt="Banner">
+                    </div>
+                    <div class="product-info">
+                        <h3>Banner</h3>
+                        <p>Price: Rp 20.000/m</p>
+                        <button onclick="event.stopPropagation(); addToCart('Banner', 20000)" class="btn btn-outline-danger">
+                            <i class="bi bi-cart-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stiker -->
+            <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="200">
+                <div class="product-card" onclick="showProductDetail('Stiker', 'Stiker.jpg', 'Rp 17.000/A3', 'Kami menyediakan berbagai jenis stiker berkualitas tinggi yang dapat disesuaikan dengan kebutuhan pribadi, bisnis, maupun event. Tersedia dalam berbagai ukuran dan bahan tahan lama, stiker kami cocok untuk kemasan produk, label, dekorasi, hingga promosi.')">
+                    <div class="product-image">
+                        <img src="Stiker.jpg" alt="Stiker">
+                    </div>
+                    <div class="product-info">
+                        <h3>Stiker</h3>
+                        <p>Price: Rp 17.000/A3</p>
+                        <button onclick="event.stopPropagation(); addToCart('Stiker', 17000)" class="btn btn-outline-danger">
+                            <i class="bi bi-cart-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- X Banner -->
+            <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="300">
+                <div class="product-card" onclick="showProductDetail('X Banner + Rangka Stainless', 'X Banner.jpg', 'Rp 150.000', 'Tingkatkan daya tarik bisnis Anda dengan X-Banner berkualitas tinggi! Produk ini adalah pilihan tepat untuk media promosi yang efisien, praktis, dan mudah dibawa ke mana saja. Desainnya yang fleksibel dan tampilannya yang elegan menjadikan X-Banner ideal untuk berbagai keperluan, seperti event, seminar, promosi produk, pameran, atau display toko. Dibuat dengan bahan cetak vinyl atau flexi berkualitas, didukung rangka X yang ringan namun kokoh, X-Banner kami hadir dengan cetakan tajam dan warna yang hidup. Anda hanya perlu pasang, berdirikan, dan X-Banner siap memikat perhatian.')">
+                    <div class="product-image">
+                        <img src="X Banner.jpg" alt="X Banner">
+                    </div>
+                    <div class="product-info">
+                        <h3>X Banner + Rangka Stainless</h3>
+                        <p>Price: Rp 150.000</p>
+                        <button onclick="event.stopPropagation(); addToCart('X Banner', 150000)" class="btn btn-outline-danger">
+                            <i class="bi bi-cart-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Design Services -->
+            <div class="col-md-6 col-lg-3" data-aos="zoom-in" data-aos-delay="400">
+                <div class="product-card" onclick="showProductDetail('Design Services', 'Design.png', 'Start From Rp 5.000', 'Layanan desain profesional untuk mendukung branding dan promosi bisnis Anda.')">
+                    <div class="product-image">
+                        <img src="Design.png" alt="Design Services">
+                    </div>
+                    <div class="product-info">
+                        <h3>Design Services</h3>
+                        <p>Price: Start From Rp 5.000</p>
+                        <button onclick="event.stopPropagation(); addToCart('Design Services', 5000)" class="btn btn-outline-danger">
+                            <i class="bi bi-cart-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- detail -->
+    <div class="modal fade" id="productDetailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="productDetailTitle">Product Title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-md-6">
+                    <img id="productDetailImage" src="Banner.jpg" class="img-fluid rounded" alt="Product Image">
+                </div>
+                <div class="col-md-6">
+                  <h4 id="productDetailPrice">Price</h4>
+                  <p id="productDetailDescription">Product description here...</p>
+                  <button id="productDetailAddCartBtn" class="btn btn-danger mt-3">
+                    <i class="bi bi-cart-plus"></i> Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    
+
+    <!-- Innovations Section -->
+    <section id="innovations" class="innovations-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">INNOVATIONS</h2>
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="innovation-card">
+                        <i class="bi bi-gpu-card"></i>
+                        <h3>Advanced Technology</h3>
+                        <p>State-of-the-art printing technology for superior quality</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="innovation-card">
+                        <i class="bi bi-lightning-charge"></i>
+                        <h3>Fast Production</h3>
+                        <p>Quick turnaround with no compromise on quality</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="innovation-card">
+                        <i class="bi bi-palette"></i>
+                        <h3>Premium Design</h3>
+                        <p>Professional design services for maximum impact</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">CONTACT US</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="contact-card" data-aos="zoom-in">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="contact-info">
+                                    <h3>GET IN TOUCH</h3>
+                                    <div class="info-item">
+                                        <i class="bi bi-geo-alt"></i>
+                                        <p>Jl. Raya Jompo Kulon No.4 Rt 02 Rw 02</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="bi bi-envelope"></i>
+                                        <p>lughriwijaya137@gmail.com</p>
+                                    </div>
+                                    <div class="info-item">
+                                        <i class="bi bi-whatsapp"></i>
+                                        <p>+62 8995 3210 50</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="social-links">
+                                    <h3>FOLLOW US</h3>
+                                    <a href="https://www.instagram.com/rijaya_adv?igsh=bjVocGpuam9vbWU1" class="social-link" target="_blank"><i class="bi bi-instagram"></i></a>
+                                    <a href="https://www.facebook.com/lughri.wijaya" class="social-link" target="_blank"><i class="bi bi-facebook"></i></a>
+                                    <a href="#" class="social-link"><i class="bi bi-twitter"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center">
+                        <img src="Rijaya Logo 1.png" alt="Rijaya Logo" class="footer-logo">
+                        <h5 class="footer-title mb-0">RIJAYA<span class="text-danger">ADV</span></h5>
+                    </div>
+                    <p>Your Design Partner</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="copyright">&copy; 2025 RijayaADV. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Register Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registerModalLabel">Create an Account</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="registerForm">
+            <div class="mb-3">
+              <label for="registerName" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="registerName" required>
+            </div>
+            <div class="mb-3">
+              <label for="registerEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="registerEmail" required>
+            </div>
+            <div class="mb-3">
+              <label for="registerPassword" class="form-label">Password</label>
+              <input type="password" class="form-control" id="registerPassword" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <p class="me-auto">Already have an account? 
+              <a href="#" onclick="switchToLogin()" class="text-danger">Login</a>
+          </p>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" onclick="registerUser()">Register</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="RijayaAdv.js"></script>
+    
+</body>
+</html>
